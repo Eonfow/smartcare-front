@@ -55,7 +55,7 @@ function config($stateProvider, $urlRouterProvider) {
 }
 angular
     .module('smartcare')
-    .constant('API_URL', 'https://smartcare-back-eonfow.c9users.io')
+    .constant('API_URL', 'http://api.smartcare.eonfow.me')
     .config(config)
     .run(function($rootScope, $state, $location) {
         $rootScope.$state = $state;
