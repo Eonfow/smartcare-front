@@ -1,0 +1,106 @@
+<div class="wrapper wrapper-content animated fadeInDown">
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="form-group">
+                        <input type="text" placeholder="Filtrar" class="input form-control" />
+                    </div>
+                    <div class="clients-list">
+                        <ul class="nav nav-tabs">
+                            <span class="pull-right small text-muted">{{ ctrl.pacientes.length }} pacientes</span>
+                            <li ng-class="{'active' : ctrl.tab == 1}"><a ng-click="ctrl.tab = 1"><i class="fa fa-user"></i> Pacientes</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="tab-1" class="tab-pane active" ng-show="ctrl.tab == 1">
+                                <div class="full-height-scroll" full-scroll>
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-hover">
+                                            <tbody>
+                                            <tr ng-repeat="paciente in ctrl.pacientes" style="cursor: pointer" ng-click="ctrl.editarPaciente(paciente)">
+                                                <td><a class="client-link">{{ paciente.nm_usuario }}</a></td>
+                                                <td class="contact-type"><i class="fa fa-envelope"> </i></td>
+                                                <td>{{ paciente.email }}</td>
+                                                <td class="contact-type"><i class="fa fa-birthday-cake"> </i></td>
+                                                <td>{{ paciente.dt_nascimento }}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4" ng-if="ctrl.pacienteSelecionado">
+            <div class="ibox ">
+                <div class="ibox-content animated fadeInDown">
+                    <div class="tab-content">
+                        <div id="contact-1" class="tab-pane active">
+                            <div class="row m-b-lg">
+                                <div class="col-lg-4 text-center">
+                                    <h2>{{ ctrl.pacienteSelecionado.nm_usuario }}</h2>
+                                </div>
+                                <div class="col-lg-8">
+                                    <strong>
+                                        Dados Cadastrais
+                                    </strong>
+                                    <p />
+                                    <div class="row">
+                                        <div class="col-sm-1">
+                                            <i class="fa fa-envelope"></i>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            {{ ctrl.pacienteSelecionado.email }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-1">
+                                            <i class="fa fa-birthday-cake"></i>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            {{ ctrl.pacienteSelecionado.dt_nascimento }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="client-detail">
+                                <div class="full-height-scroll" full-scroll>
+
+                                    <strong>Cuidadores</strong>
+                                    <ul class="list-group clear-list" ng-repeat="cddr in ctrl.pacienteSelecionado.cuidadores">
+                                        <li class="list-group-item fist-item">
+                                            <span class="pull-right" style="cursor: pointer" ng-click="ctrl.removerCuidador(cddr, $index)"><i class="fa fa-trash" style="color: red" aria-hidden="true"></i> Remover</span>
+                                            {{ cddr.nm_usuario }}
+                                        </li>
+                                    </ul>
+                                    <div ng-if="!ctrl.pacienteSelecionado.cuidadores.length">
+                                        Nenhum cuidador associado
+                                    </div>
+                                    <hr/>
+                                    <strong>Últimos registros Arduino</strong>
+                                    <div id="vertical-timeline" class="vertical-container dark-timeline">
+                                        <div ng-repeat="reg in ctrl.pacienteSelecionado.registros" class="vertical-timeline-block">
+                                            <div class="vertical-timeline-icon gray-bg">
+                                                <i class="fa fa-coffee"></i>
+                                            </div>
+                                            <div class="vertical-timeline-content">
+                                                <p>Temperatura: {{ reg.info.temp.temp }}
+                                                </p>
+                                                <p>Acelerometro: X: {{ reg.info.acelerometro.eixo_x }}, Y: {{ reg.info.acelerometro.eixo_y }}, Z: {{ reg.info.acelerometro.eixo_z }}</p>
+                                                <span class="vertical-date small text-muted"> {{ reg.data }} </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

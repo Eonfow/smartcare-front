@@ -1,0 +1,75 @@
+#loading .wrapper {
+  font-size: 1.6rem;
+  background: #dad8d2;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+#loading .hourglass {
+  display: block;
+  background: #dad8d2;
+  margin: 3em auto;
+  width: 2em;
+  height: 4em;
+  box-shadow: inset #dad8d2 0 0 0 0, inset #00b7c6 0 2em 0 0, inset #dad8d2 0 0 4em 0;
+  -webkit-animation: hourglass 1s linear infinite;
+          animation: hourglass 1s linear infinite;
+}
+
+#loading .outer {
+  fill: #00b7c6;
+}
+
+#loading .middle {
+  fill: #dad8d2;
+}
+
+@-webkit-keyframes hourglass {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+    box-shadow: inset #dad8d2 0 0 0 0, inset #00b7c6 0 2em 0 0, inset #dad8d2 0 4em 0 0, inset #00b7c6 0 4em 0 0;
+  }
+  80% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+    box-shadow: inset #dad8d2 0 2em 0 0, inset #00b7c6 0 2em 0 0, inset #dad8d2 0 2em 0 0, inset #00b7c6 0 4em 0 0;
+  }
+  100% {
+    -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+    box-shadow: inset #dad8d2 0 2em 0 0, inset #00b7c6 0 2em 0 0, inset #dad8d2 0 2em 0 0, inset #00b7c6 0 4em 0 0;
+  }
+}
+
+@keyframes hourglass {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+    box-shadow: inset #dad8d2 0 0 0 0, inset #00b7c6 0 2em 0 0, inset #dad8d2 0 4em 0 0, inset #00b7c6 0 4em 0 0;
+  }
+  80% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+    box-shadow: inset #dad8d2 0 2em 0 0, inset #00b7c6 0 2em 0 0, inset #dad8d2 0 2em 0 0, inset #00b7c6 0 4em 0 0;
+  }
+  100% {
+    -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+    box-shadow: inset #dad8d2 0 2em 0 0, inset #00b7c6 0 2em 0 0, inset #dad8d2 0 2em 0 0, inset #00b7c6 0 4em 0 0;
+  }
+}
