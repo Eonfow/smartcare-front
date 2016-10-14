@@ -1,11 +1,25 @@
-/**
- * INSPINIA - Responsive Admin Theme
- *
- * Inspinia theme use AngularUI Router to manage routing and views
- * Each view are defined as state.
- * Initial there are written stat for all view in theme.
- *
- */
+angular
+    .module('smartcare')
+    .constant('API_URL', 'http://api.smartcare.eonfow.me')
+    //.constant('API_URL', 'https://smartcare-back-eonfow.c9users.io')
+    .config(config)
+    .run(function($rootScope, $state, $location) {
+        $rootScope.$state = $state;
+
+        var token = localStorage.getItem("token");
+
+        if(!token){
+            localStorage.removeItem("token");
+        }
+
+        $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
+            if(!toState.whitelisted && !localStorage.getItem("token")) {
+                event.preventDefault();
+                $state.go('login');
+            }
+        });
+    });
+
 function config($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise("/index/principal");
 
@@ -53,23 +67,3 @@ function config($stateProvider, $urlRouterProvider) {
             controllerAs: 'ctrl'
         });
 }
-angular
-    .module('smartcare')
-    .constant('API_URL', 'http://api.smartcare.eonfow.me')
-    .config(config)
-    .run(function($rootScope, $state, $location) {
-        $rootScope.$state = $state;
-
-        var token = localStorage.getItem("token");
-
-        if(!token){
-            localStorage.removeItem("token");
-        }
-
-        $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
-            if(!toState.whitelisted && !localStorage.getItem("token")) {
-                event.preventDefault();
-                $state.go('login');
-            }
-        });
-    });
