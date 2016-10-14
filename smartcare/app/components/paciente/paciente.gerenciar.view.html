@@ -4,7 +4,7 @@
             <div class="ibox">
                 <div class="ibox-content">
                     <div class="form-group">
-                        <input type="text" placeholder="Filtrar" class="input form-control" />
+                        <input type="text" placeholder="Filtrar" ng-model="ctrl.pesquisa" class="input form-control" />
                     </div>
                     <div class="clients-list">
                         <ul class="nav nav-tabs">
@@ -17,7 +17,7 @@
                                     <div class="table-responsive">
                                         <table class="table table-striped table-hover">
                                             <tbody>
-                                            <tr ng-repeat="paciente in ctrl.pacientes" style="cursor: pointer" ng-click="ctrl.editarPaciente(paciente)">
+                                            <tr ng-repeat="paciente in ctrl.pacientes | filter:ctrl.pesquisa" style="cursor: pointer" ng-click="ctrl.editarPaciente(paciente)">
                                                 <td><a class="client-link">{{ paciente.nm_usuario }}</a></td>
                                                 <td class="contact-type"><i class="fa fa-envelope"> </i></td>
                                                 <td>{{ paciente.email }}</td>
@@ -34,6 +34,9 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="col-sm-4" ng-show="ctrl.loading" style="text-align: center">
+            <i class="fa fa-spinner fa-spin" style="font-size: 55px"></i>
         </div>
         <div class="col-sm-4" ng-if="ctrl.pacienteSelecionado">
             <div class="ibox ">
@@ -83,15 +86,15 @@
                                     <hr/>
                                     <strong>Últimos registros Arduino</strong>
                                     <div id="vertical-timeline" class="vertical-container dark-timeline">
-                                        <div ng-repeat="reg in ctrl.pacienteSelecionado.registros" class="vertical-timeline-block">
+                                        <div ng-repeat="reg in ctrl.pacienteSelecionado.registros | orderBy:'-dataFormatada'" class="vertical-timeline-block">
                                             <div class="vertical-timeline-icon gray-bg">
-                                                <i class="fa fa-coffee"></i>
+                                                <i class="fa fa-heartbeat"></i>
                                             </div>
                                             <div class="vertical-timeline-content">
                                                 <p>Temperatura: {{ reg.info.temp.temp }}
                                                 </p>
                                                 <p>Acelerometro: X: {{ reg.info.acelerometro.eixo_x }}, Y: {{ reg.info.acelerometro.eixo_y }}, Z: {{ reg.info.acelerometro.eixo_z }}</p>
-                                                <span class="vertical-date small text-muted"> {{ reg.data }} </span>
+                                                <span class="vertical-date small text-muted"> {{ reg.dataFormatada }} </span>
                                             </div>
                                         </div>
                                     </div>

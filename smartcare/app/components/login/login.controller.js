@@ -9,6 +9,7 @@
   function LoginController($scope, LoginService, $state) {
     var vm = this;
     vm.autenticar = autenticar;
+    vm.loading = false;
 
     function autenticar() {
       vm.formulario.$setSubmitted();
@@ -18,6 +19,7 @@
         return;
       }
 
+      vm.loading = true;
       LoginService.autenticar(vm.login, vm.senha )
         .success(function(data) {
           if(data.success) {
@@ -25,8 +27,10 @@
             $state.go('index.main');
           }
           else {
-            toastr.error(data.errBody);
+            toastr.error('Usuário e/ou senhas inválidos');
           }
+
+          vm.loading = false;
         });
     }
   }

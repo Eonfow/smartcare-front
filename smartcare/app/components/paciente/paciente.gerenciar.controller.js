@@ -13,6 +13,7 @@
     vm.tab = 1;
     vm.editarPaciente = editarPaciente;
     vm.removerCuidador = removerCuidador;
+    vm.loading = false;
 
     //preenche a lista de pacientes
     PacientesService.listar()
@@ -28,11 +29,19 @@
     function editarPaciente(paciente) {
       vm.pacienteSelecionado = null;
 
+      vm.loading = true;
       PacientesService.consultarDadosArduino({ idArduino: paciente.idArduino })
         .success(function(data) {
+          vm.loading = false;
+
           if(!data.success) {
             toastr.error('Erro ao consultar dados do paciente');
             return;
+          }
+
+          //faz o tratamento das datas
+          for(var i = 0; i < data.result.docs.length; i++) {
+            data.result.docs[i].dataFormatada = moment(data.result.docs[i].data).format("DD/MM/YYYY HH:mm:ss");
           }
 
           vm.pacienteSelecionado = paciente;

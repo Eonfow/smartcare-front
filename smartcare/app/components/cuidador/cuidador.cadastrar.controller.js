@@ -9,7 +9,7 @@
   function CadastrarCuidadorController(CuidadoresService) {
     var vm = this;
     vm.formulario = {};
-    vm.paciente = {};
+    vm.cuidador = {};
     vm.cadastrarCuidador = cadastrarCuidador;
 
     function cadastrarCuidador() {
@@ -20,8 +20,10 @@
         return;
       }
 
+      vm.cuidador.tp_acesso = 'cuidadores';
+
       //cadastra o novo cuidador
-      CuidadoresService.inserir(vm.paciente)
+      CuidadoresService.inserir(vm.cuidador)
         .success(function(data) {
           if(data.success) {
             toastr.success('Cuidador cadastrado com sucesso!');

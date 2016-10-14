@@ -11,7 +11,10 @@
             <div class="form-group">
                 <input ng-model="ctrl.senha" type="password" class="form-control" placeholder="Senha" required>
             </div>
-            <button type="button" class="btn btn-primary block full-width m-b" ng-click="ctrl.autenticar()">Entrar</button>
+            <button ng-disabled="ctrl.loading" type="button" class="btn btn-primary block full-width m-b" ng-click="ctrl.autenticar()">
+                <span ng-if="!ctrl.loading">Entrar</span>
+                <i class="fa fa-spinner fa-spin" ng-if="ctrl.loading"></i>
+            </button>
         </form>
     </div>
 </div>
